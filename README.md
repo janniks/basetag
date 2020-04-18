@@ -9,7 +9,7 @@ _<sup>NOT VALIDATED YET: Works with `npm`, `pnpm`, `ied`, `yarn`</sup>_
 
 ## Why? ⚡️
 
-What does `at-base` solve?
+**What does `at-base` solve?**
 
 In NodeJS applications we sometimes want to require local packages that are in different subdirectories.
 This can lead to very messy looking `require` statements.
