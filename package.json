@@ -1,0 +1,28 @@
+{
+  "name": "at-base",
+  "version": "0.1.0",
+  "description": "WIP",
+  "main": "postinstall.js",
+  "scripts": {
+    "test": "test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janniks/at-base.git"
+  },
+  "keywords": [
+    "at",
+    "base",
+    "relative",
+    "path",
+    "require",
+    "import",
+    "local"
+  ],
+  "author": "janniks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/janniks/at-base/issues"
+  },
+  "homepage": "https://github.com/janniks/at-base#readme"
+}
