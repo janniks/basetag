@@ -1,7 +1,7 @@
 {
   "name": "at-base",
-  "version": "0.1.0",
-  "description": "WIP",
+  "version": "1.0.0",
+  "description": "A better way to import NodeJS modules",
   "main": "postinstall.js",
   "scripts": {
     "postinstall": "node postinstall.js",
@@ -12,13 +12,15 @@
     "url": "git+https://github.com/janniks/at-base.git"
   },
   "keywords": [
+    "@",
     "at",
     "base",
     "relative",
     "path",
     "require",
     "import",
-    "local"
+    "local",
+    "symlink"
   ],
   "author": "janniks",
   "license": "MIT",
