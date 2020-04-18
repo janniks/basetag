@@ -9,21 +9,21 @@ const logBlue = (message) => console.log(`${blue}${message}${reset}`);
 const logYellow = (message) => console.log(`⚠️ ${yellow}${message}${reset}`);
 
 logBlue("at-base:");
-logBlue("  Creating @ symlink to base directory...");
+logBlue("- Creating @ symlink to base directory...");
 
 try {
   const scriptPath = fs.realpathSync(__dirname);
 
   const lIndex = scriptPath.lastIndexOf("/node_modules/");
   if (lIndex === -1) {
-    throw "  E010: Could not find node_modules directory in __dirname";
+    throw "- E010: Could not find node_modules directory in __dirname";
   }
 
   const base = scriptPath.slice(0, lIndex);
   const atLink = path.resolve(base, "node_modules/@");
   fs.symlinkSync(base, atLink, "junction");
 
-  logBlue(`  Created @ symlink to ${base}`);
+  logBlue(`- Created @ symlink to ${base}\n`);
 } catch (error) {
   logYellow(error.message);
 }
