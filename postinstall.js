@@ -20,7 +20,10 @@ try {
   }
 
   const base = scriptPath.slice(0, lIndex);
-  const atLink = path.resolve(base, "/node_modules/@");
+  const atLink = path.resolve([base, "/node_modules/@"]);
+
+  logBlue(`base ${base}`);
+  logBlue(`atLink ${atLink}`);
 
   fs.symlinkSync(base, atLink, "junction");
 } catch (error) {
