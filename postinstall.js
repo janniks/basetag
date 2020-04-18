@@ -20,7 +20,7 @@ try {
 
   const base = scriptPath.slice(0, lIndex);
   const atLink = path.resolve(base, "node_modules/@");
-  if (fs.existsSync(path)) {
+  if (fs.existsSync(atLink)) {
     throw "- File already exists\n- Not creating @ symlink";
   }
 
