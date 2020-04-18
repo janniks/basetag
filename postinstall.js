@@ -27,11 +27,11 @@ try {
 
   logBlue(atLink);
 
-  if (fs.existsSync(atLink)) {
+  if (fs.accessSync(atLink)) {
     throw "- File already exists\n- Not creating @ symlink";
   }
 
-  fs.access(base, atLink, "junction");
+  fs.symlinkSync(base, atLink, "junction");
 
   logBlue(`- Created @ symlink to ${base}\n`);
 } catch (error) {
