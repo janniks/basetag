@@ -6,7 +6,7 @@
 `npm i -S at-base`
 
 ☝️ and that's it!
-You're can use `at-base`.
+You can use `at-base`.
 No need to `require('at-base')` anywhere.
 
 ## Why? ⚡️
