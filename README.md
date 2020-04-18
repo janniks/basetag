@@ -1,5 +1,5 @@
 # at-base ⚾️
-`at-base` _(pronounced `@ base`)_ lets you require local packages relative your NodeJS applications base path.
+`at-base` _(pronounced `@ base`)_ lets you require local packages relative to your NodeJS applications base path.
 
 ## Installation
 
