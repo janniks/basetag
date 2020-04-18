@@ -4,7 +4,8 @@
   "description": "WIP",
   "main": "postinstall.js",
   "scripts": {
-    "test": "test/test.js"
+    "postinstall": "node postinstall.js",
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
