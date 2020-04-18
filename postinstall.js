@@ -31,7 +31,7 @@ try {
     throw "- File already exists\n- Not creating @ symlink";
   }
 
-  fs.symlinkSync(base, atLink, "junction");
+  fs.access(base, atLink, "junction");
 
   logBlue(`- Created @ symlink to ${base}\n`);
 } catch (error) {
