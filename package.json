@@ -1,0 +1,31 @@
+{
+  "name": "at-base",
+  "version": "1.0.0",
+  "description": "A better way to import NodeJS modules",
+  "main": "postinstall.js",
+  "scripts": {
+    "postinstall": "node postinstall.js",
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janniks/at-base.git"
+  },
+  "keywords": [
+    "@",
+    "at",
+    "base",
+    "relative",
+    "path",
+    "require",
+    "import",
+    "local",
+    "symlink"
+  ],
+  "author": "janniks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/janniks/at-base/issues"
+  },
+  "homepage": "https://github.com/janniks/at-base#readme"
+}
