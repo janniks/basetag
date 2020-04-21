@@ -1,6 +1,6 @@
 {
-  "name": "at-base",
-  "version": "1.0.0",
+  "name": "basetag",
+  "version": "0.2.0",
   "description": "A better way to import NodeJS modules",
   "main": "postinstall.js",
   "scripts": {
@@ -9,12 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/janniks/at-base.git"
+    "url": "git+https://github.com/janniks/basetag.git"
   },
   "keywords": [
-    "@",
-    "at",
+    "basetag",
     "base",
+    "tag",
+    "$",
     "relative",
     "path",
     "require",
@@ -25,7 +26,7 @@
   "author": "janniks",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/janniks/at-base/issues"
+    "url": "https://github.com/janniks/basetag/issues"
   },
-  "homepage": "https://github.com/janniks/at-base#readme"
+  "homepage": "https://github.com/janniks/basetag#readme"
 }
