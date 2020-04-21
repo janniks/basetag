@@ -39,6 +39,7 @@ Look at the code in `test/example/` for a real-life example.
 
 A larger project can have many nested subfolders as shown in the directory structure below.
 Of course a _real_ project would have more files in those subdirectories but for simplicity we'll leave those out.
+Using `basetag` you can reference modules from the base `example/` path, rather than using relative directories (i.e. `../../..`).
 
 ```
 example/
@@ -58,7 +59,7 @@ example/
 ### How does `basetag` work?
 
 It's rather simple.
-After installing `basetag` as a dependency our `postinstall` script creates a symlink that points from `node_modules/@` to your projects base directory.
+After installing `basetag` as a dependency a `postinstall` script creates a symlink that points from `node_modules/$` to your projects base directory.
 Everytime you use a `require` with `$/…` NodeJS will look inside the `$` package (i.e. our new symlink).
 The lookup is routed natively to your projects files.
 
