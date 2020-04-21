@@ -1,7 +1,7 @@
-<h1 align="center">⚾️ <strong>basetag</strong></h1>
+<h1 align="center" style="font-weight: bold">⚾️ basetag</h1>
 
 <p align="center">
-  <pre>basetag</pre>lets you require local modules relative to your NodeJS applications base path.
+  <code>basetag</code> lets you require local modules relative to your NodeJS applications base path.
 </p>
 
 <p align="center">
