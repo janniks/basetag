@@ -17,7 +17,7 @@ function execute(command) {
   "npm pack ../..",
   `npm install --save ${package.name}-${package.version}.tgz`,
   "node index.js",
-].forEach(async (command) => {
+].forEach((command) => {
   try {
     const result = execute(command);
 
