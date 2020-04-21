@@ -1,5 +1,5 @@
 # ⚾️ basetag
-`basetag` lets you require local packages relative to your NodeJS applications base path.
+`basetag` lets you require local modules relative to your NodeJS applications base path.
 
 ## Installation 🛠
 
@@ -13,16 +13,10 @@ No need to `require('basetag')` anywhere.
 
 **What does `basetag` solve?**
 
-In NodeJS applications we sometimes want to import local packages that are in different far away subdirectories.
+In NodeJS applications we sometimes want to import local modules that are in different far away subdirectories.
 This can lead to very messy looking `require` statements.
-`basetag` allows you to import packages using `$` as the applications base path.
+`basetag` allows you to import modules using `$/` as the applications base path.
 If you're not convinced—check out the example below...
-
-😓 _The traditional (often messy) way:_
-
-```js
-const balls = require('../../../../baseball/balls') // ❌
-```
 
 🤯 _The modern_ `basetag` _way:_
 
@@ -30,7 +24,38 @@ const balls = require('../../../../baseball/balls') // ❌
 const balls = require('$/baseball/balls')           // ✅
 ```
 
+😓 _The traditional (often messy) way:_
+
+```js
+const balls = require('../../../../baseball/balls') // ❌
+```
+
 ## How? 💭
+
+### How do I use `basetag`?
+
+It's really all described above and there's not much to it.
+Look at the code in `test/example/` for a real-life example.
+
+A larger project can have many nested subfolders as shown in the directory structure below.
+Of course a _real_ project would have more files in those subdirectories but for simplicity we'll leave those out.
+
+```
+example/
+├── its/
+│   └── baseballs/
+│       └── all/
+│           └── the/
+│               └── way/
+│                   └── down.js
+├── somewhere/
+│   └── deep/
+│       └── and/
+│           └── random.js
+└── index.js
+```
+
+### How does `basetag` work?
 
 It's rather simple.
 After installing `basetag` as a dependency our `postinstall` script creates a symlink that points from `node_modules/@` to your projects base directory.
