@@ -35,7 +35,7 @@ const balls = require('../../../../baseball/balls') // ❌
 ### How do I use `basetag`?
 
 It's really all described above and there's not much to it.
-Look at the code in `test/example/` for a real-life example.
+Look at the code in [`test/example/`](test/example/) for a real-life example.
 
 A larger project can have many nested subfolders as shown in the directory structure below.
 Of course a _real_ project would have more files in those subdirectories but for simplicity we'll leave those out.
@@ -64,7 +64,7 @@ Everytime you use a `require` with `$/…` NodeJS will look inside the `$` packa
 The lookup is routed natively to your projects files.
 
 To NodeJS, both methods of requiring look the same, because the files are literally the same files.
-We can use both methods in the same project and NodeJS will cache imports correctly.
+Both methods can be used in the same project and NodeJS will cache imports correctly.
 
 ## License ⚖️
 
