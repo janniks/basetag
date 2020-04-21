@@ -20,7 +20,7 @@ function fileExists(path) {
 }
 
 // Main
-log(`at-base ${package.version}:`);
+log(`${package.name}@${package.version}`);
 
 try {
   const lIndex = __dirname.lastIndexOf("/node_modules/");
