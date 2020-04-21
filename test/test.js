@@ -19,23 +19,20 @@ function execute(command) {
   "node index.js",
 ].forEach(async (command) => {
   try {
-    process.stdout.write(`  ${command}`);
-    process.stdout.cursorTo(0);
-
     const result = execute(command);
 
     if (result.error) throw result.error;
 
     if (result.status != 0) {
-      console.log(`\nstdout:\n${result.stdout}`);
+      console.log(`stdout:\n${result.stdout}`);
       console.error(`stderr:\n${result.stderr}`);
       throw "Bad status code";
     }
 
-    process.stdout.clearLine();
     console.log(`✓ ${command}`);
   } catch (error) {
-    console.error(`\n${error.stack ? error.stack : error}`);
+    console.log(`⨯ ${command}`);
+    console.error(`${error.stack ? error.stack : error}`);
     process.exit(1);
   }
 });
