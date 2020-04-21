@@ -1,5 +1,39 @@
-# ⚾️ basetag
-`basetag` lets you require local modules relative to your NodeJS applications base path.
+<h1 align="center">⚾️ <strong>basetag</strong></h1>
+
+<p align="center">
+  <pre>basetag</pre>lets you require local modules relative to your NodeJS applications base path.
+</p>
+
+<p align="center">
+  <a href="https://github.com/janniks/basetag/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license" />
+  </a>
+  <a href="https://github.com/janniks/basetag/actions">
+    <img src="https://github.com/janniks/basetag/workflows/build/badge.svg" alt="Build status" />
+  </a>
+  <a href="https://www.npmjs.org/package/basetag">
+    <img src="https://img.shields.io/npm/v/basetag.svg" alt="Package version" />
+  </a>
+  <a href="https://npmcharts.com/compare/basetag?minimal=true">
+    <img src="https://img.shields.io/npm/dm/basetag.svg" alt="Downloads per month" />
+  </a>
+  <a href="https://npmcharts.com/compare/basetag?minimal=true">
+    <img src="https://img.shields.io/npm/dt/basetag.svg" alt="Total downloads" />
+  </a>
+  <a href="https://twitter.com/intent/follow?screen_name=jnnksbrt">
+    <img src="https://img.shields.io/twitter/follow/jnnksbrt.svg?label=Follow%20@jnnksbrt" alt="Follow @jnnksbrt on Twitter" />
+  </a>
+</p>
+
+<h3 align="center">
+  <a href="#installation-">Installation</a>
+  <span> · </span>
+  <a href="#why-%EF%B8%8F">Why?</a>
+  <span> · </span>
+  <a href="#how-">How?</a>
+  <span> · </span>
+  <a href="#license-%EF%B8%8F">License</a>
+</h3>
 
 ## Installation 🛠
 
