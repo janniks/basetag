@@ -29,20 +29,20 @@ try {
   }
 
   const base = path.resolve(__dirname.slice(0, lIndex));
-  const atLink = path.resolve(base, "node_modules/@");
+  const atLink = path.resolve(base, "node_modules/$");
 
   if (fileExists(atLink)) {
     if (base === fs.realpathSync(atLink)) {
-      log("- @ symlink already points to base\n");
+      log("- $ symlink already points to base\n");
       process.exit();
     }
 
-    throw "- File already exists: node_modules/@";
+    throw "- File already exists: node_modules/$";
   }
 
   fs.symlinkSync(base, atLink, "junction");
 
-  log(`- Created @ symlink to ${base}\n`);
+  log(`- Created $ symlink to ${base}\n`);
 } catch (error) {
-  console.warn(`${yellow}${error}\n- Not creating @ symlink${reset}\n`);
+  console.warn(`${yellow}${error}\n- Not creating $ symlink${reset}\n`);
 }
