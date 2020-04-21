@@ -14,7 +14,7 @@ function fileExists(path) {
   try {
     fs.accessSync(path);
     return true;
-  } catch {
+  } catch (e) {
     return false;
   }
 }
