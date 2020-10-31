@@ -99,6 +99,12 @@ The lookup is routed natively to your project files.
 To Node.js, both methods of requiring look the same, because the files are literally the same files.
 Both methods can be used in the same project and Node.js will cache imports correctly.
 
+## Compatibility
+
+Tested on macOS.
+
+Some issues on Windows may occur, but will be resolved soon...
+
 ## License ⚖️
 
 [MIT](LICENSE)
