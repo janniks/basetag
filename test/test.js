@@ -1,9 +1,9 @@
-const path = require('path');
+const resolve = require('path').resolve;
 const spawnSync = require('child_process').spawnSync;
 
 const pkg = require('../package');
 
-const exampleDir = path.resolve(__dirname, 'example');
+const exampleDir = resolve(__dirname, 'example');
 
 function execute(command) {
   const args = command.split(' ');
@@ -13,7 +13,8 @@ function execute(command) {
 
 [
   'rm -rf node_modules *.json *.tgz',
-  `npm pack ..${path.sep}..`,
+  'npm init -y',
+  'npm pack ../..',
   `npm install --save ${pkg.name}-${pkg.version}.tgz`,
   'node index.js',
 ].forEach((command) => {
