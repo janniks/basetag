@@ -4,11 +4,12 @@ const spawnSync = require('child_process').spawnSync;
 const pkg = require('../package');
 
 const exampleDir = path.resolve(__dirname, 'example');
+console.log(exampleDir);
 
 function execute(command) {
   const args = command.split(' ');
   const prog = args.shift();
-  return spawnSync(prog, args, { cwd: exampleDir });
+  return spawnSync(prog, args, { cwd: exampleDir, shell: true });
 }
 
 [
