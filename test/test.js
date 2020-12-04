@@ -1,22 +1,22 @@
-const resolve = require("path").resolve;
-const spawnSync = require("child_process").spawnSync;
+const resolve = require('path').resolve;
+const spawnSync = require('child_process').spawnSync;
 
-const package = require("../package");
+const pkg = require('../package');
 
-const example = resolve(__dirname, "example");
+const exampleDir = resolve(__dirname, 'example');
 
 function execute(command) {
-  const args = command.split(" ");
+  const args = command.split(' ');
   const prog = args.shift();
-  return spawnSync(prog, args, { cwd: example });
+  return spawnSync(prog, args, { cwd: exampleDir });
 }
 
 [
-  "rm -rf node_modules *.json *.tgz",
-  "npm init -y",
-  "npm pack ../..",
-  `npm install --save ${package.name}-${package.version}.tgz`,
-  "node index.js",
+  'rm -rf node_modules *.json *.tgz',
+  'npm init -y',
+  'npm pack ../..',
+  `npm install --save ${pkg.name}-${pkg.version}.tgz`,
+  'node index.js',
 ].forEach((command) => {
   try {
     const result = execute(command);
@@ -26,7 +26,7 @@ function execute(command) {
     if (result.status != 0) {
       console.log(`stdout:\n${result.stdout}`);
       console.error(`stderr:\n${result.stderr}`);
-      throw "Bad status code";
+      throw 'Bad status code';
     }
 
     console.log(`✓ ${command}`);
@@ -37,4 +37,4 @@ function execute(command) {
   }
 });
 
-console.log("\nTest passed.");
+console.log('\nTest passed.');
