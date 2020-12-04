@@ -14,6 +14,7 @@ function execute(command) {
 
 [
   'rm -rf node_modules *.json *.tgz',
+  'npm init -y',
   `npm pack ..${path.sep}..`,
   `npm install --save ${pkg.name}-${pkg.version}.tgz`,
   'node index.js',
