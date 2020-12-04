@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const package = require("./package");
+const pkg = require("./package");
 
 // Helpers
 const reset = "\x1b[0m";
@@ -20,12 +20,12 @@ function fileExists(path) {
 }
 
 // Main
-log(`${package.name}@${package.version}`);
+log(`${pkg.name}@${pkg.version}`);
 
 try {
-  const lIndex = __dirname.lastIndexOf("/node_modules/");
+  const lIndex = __dirname.lastIndexOf(path.sep + "node_modules" + path.sep);
   if (lIndex === -1) {
-    throw "- Could not find node_modules directory in __dirname";
+    throw new Error("- Could not find node_modules directory in __dirname");
   }
 
   const base = path.resolve(__dirname.slice(0, lIndex));
@@ -37,12 +37,12 @@ try {
       process.exit();
     }
 
-    throw "- File already exists: node_modules/$";
+    throw new Error("- File already exists: node_modules/$");
   }
 
   fs.symlinkSync(base, atLink, "junction");
 
   log(`- Created $ symlink to ${base}\n`);
 } catch (error) {
-  console.warn(`${yellow}${error}\n- Not creating $ symlink${reset}\n`);
+  console.warn(`${yellow}${error.message}\n- Not creating $ symlink${reset}\n`);
 }
