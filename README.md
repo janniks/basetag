@@ -101,9 +101,7 @@ Both methods can be used in the same project and Node.js will cache imports corr
 
 ## Compatibility
 
-Tested on macOS.
-
-Some issues on Windows may occur, but will be resolved soon...
+`basetag` supports macOS, Linux, and Windows as of version `1.1.0`.
 
 ## License ⚖️
 
