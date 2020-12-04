@@ -13,7 +13,7 @@ function execute(command) {
 
 [
   'rm -rf node_modules *.json *.tgz',
-  'npm init -y',
+  // 'npm init -y',
   'npm pack ../..',
   `npm install --save ${pkg.name}-${pkg.version}.tgz`,
   'node index.js',
