@@ -99,6 +99,10 @@ The lookup is routed natively to your project files.
 To Node.js, both methods of requiring look the same, because the files are literally the same files.
 Both methods can be used in the same project and Node.js will cache imports correctly.
 
+## Compatibility
+
+`basetag` supports macOS, Linux, and Windows as of version `1.1.0`.
+
 ## License ⚖️
 
 [MIT](LICENSE)
