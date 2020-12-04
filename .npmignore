@@ -1,4 +1,7 @@
 .github
+.editorconfig
+.prettierrc
+README.md
 test
 
 # Created by https://www.gitignore.io/api/node,macos
