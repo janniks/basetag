@@ -3,6 +3,13 @@
   "version": "1.1.0",
   "description": "A better way to import NodeJS modules",
   "main": "postinstall.js",
+  "bin": {
+    "basetag": "bin/basetag.js"
+  },
+  "files": [
+    "bin/basetag.js",
+    "postinstall.js"
+  ],
   "scripts": {
     "postinstall": "node postinstall.js",
     "test": "node test/test.js"
