@@ -1,6 +1,6 @@
 {
   "name": "basetag",
-  "version": "1.2.5",
+  "version": "1.2.11",
   "description": "A better way to import NodeJS modules",
   "main": "postinstall.js",
   "bin": {
