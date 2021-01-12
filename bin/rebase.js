@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 
+const path = require('path');
+const fs = require('fs').promises;
+
 // todo: add .gitignore patterns to ignore list
 const IGNORE_LIST = ['node_modules', '.git'];
 
-const DRY_RUN = process.argv.includes('--dry-run');
+const args = new Set(process.argv);
+const OPT_DRY_RUN = args.has('--dry-run');
+const OPT_ALL = ['all', '--all', '-a'].some((x) => args.has(x));
 
 // @root/walk (https://git.rootprojects.org/root/walk.js)
 // Copyright 2020 AJ ONeal - Mozilla Public License Version 2.0
@@ -55,43 +60,31 @@ async function walk(pathname, walkFunc, _dirent) {
 
 ('use strict');
 
-var path = require('path');
-var fs = require('fs').promises;
-
 // assume that the command is run from the package root
 var pkglen = process.cwd().length; // no trailing '/'
 
 // matches requires that start with '../' (leaves child-relative requires alone)
-var parentRequires = /(require\(['"])(\.\..*)(['"]\))/g;
-var parentImports = /(import\s*\(?[\w\s{}]*['"])(\.\..*)(['"]\)?)/g;
-// matches requires that start with './' (includes child-relative requires)
-var allRequires = /(require\(['"])(\..*)(['"]\))/g;
-var allImports = /(import\s*\(?[\w\s{}]*['"])(\..*)(['"]\)?)/g;
+const parentRequires = /(require\(['"])(\.\..*)(['"]\))/g;
+const parentImports = /(import\s*\(?[\w\s{}]*['"])(\.\..*)(['"]\)?)/g;
 
-// add flag parsing
-var opts = {};
-[['all', '-a', '--all']].forEach(function (flags) {
-  flags.slice(1).some(function (alias) {
-    if (process.argv.slice(2).includes(alias)) {
-      opts[flags[0]] = true;
-    }
-  });
-});
+// matches requires that start with './' (includes child-relative requires)
+const allRequires = /(require\(['"])(\..*)(['"]\))/g;
+const allImports = /(import\s*\(?[\w\s{}]*['"])(\..*)(['"]\)?)/g;
 
 async function rootify(pathname, filename) {
-  // TODO not sure if this load order is exactly correct
-  var loadable = ['.js', '.cjs', '.mjs', '.json'];
+  // todo: not sure if this load order is exactly correct
+  const loadable = ['.js', '.cjs', '.mjs', '.json'];
   if (!loadable.includes(path.extname(filename))) {
     //console.warn("# warn: skipping non-js file '%s'", filename);
     return;
   }
 
-  var dirname = path.dirname(pathname);
+  const dirname = path.dirname(pathname);
   pathname = path.resolve(pathname);
 
   var requiresRe;
   var importsRe;
-  if (opts.all) {
+  if (OPT_ALL) {
     requiresRe = allRequires;
     importsRe = allImports;
   } else {
@@ -99,33 +92,32 @@ async function rootify(pathname, filename) {
     importsRe = parentImports;
   }
 
-  var oldTxt = await fs.readFile(pathname, 'utf8');
-  var changes = [];
-  var txt = oldTxt
-    .replace(requiresRe, replaceImports)
-    .replace(importsRe, replaceImports);
-
   function replaceImports(_, a, b, c) {
-    //console.log(a, b, c);
     // a = 'require("' OR 'import("' OR 'import "'
     // b = '../../foo.js'
     // c = '")' OR ''
 
     // /User/me/project/lib/foo/bar + ../foo.js
     // becomes $/lib/foo/foo.js
-    var pkgpath = '$' + path.resolve(dirname + '/', b).slice(pkglen);
+    const pkgpath = '$' + path.resolve(dirname + '/', b).slice(pkglen);
 
-    var result = a + pkgpath + c;
+    const result = a + pkgpath + c;
     changes.push([pkgpath, b]);
     return result;
   }
 
-  if (oldTxt != txt) {
+  const originalText = await fs.readFile(pathname, 'utf8');
+  const changes = [];
+  const newText = originalText
+    .replace(requiresRe, replaceImports)
+    .replace(importsRe, replaceImports);
+
+  if (originalText != newText) {
     console.info(`\n# ${dirname}${path.sep}${filename}`);
     changes.forEach(function ([pkgpath, b]) {
       console.log(`  ${b} -> ${pkgpath}`);
     });
-    await fs.writeFile(pathname, txt);
+    await fs.writeFile(pathname, newText);
   }
 }
 
