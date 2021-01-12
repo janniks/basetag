@@ -1,17 +1,18 @@
 {
   "name": "basetag",
-  "version": "1.2.0",
+  "version": "1.2.5",
   "description": "A better way to import NodeJS modules",
   "main": "postinstall.js",
   "bin": {
-    "basetag": "bin/basetag.js"
+    "basetag": "bin/index.js",
+    "basetag-link": "bin/link.js",
+    "basetag-rebase": "bin/rebase.js"
   },
   "files": [
-    "bin/basetag.js",
-    "postinstall.js"
+    "bin/**.js",
+    "lib/**.js"
   ],
   "scripts": {
-    "postinstall": "node postinstall.js",
     "test": "node test/test.js"
   },
   "repository": {

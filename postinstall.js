@@ -1,1 +1,1 @@
-require('./bin/basetag.js');
+require('./bin/link.js');

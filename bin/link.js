@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { fileExists } = require('../lib/utils');
+
 const pkg = require('../package.json');
 
 // Helpers
@@ -14,22 +16,14 @@ const log = (message) => console.log(`${blue}${message}${reset}`);
 
 const modulesDir = 'node_modules';
 
-function fileExists(path) {
-  try {
-    fs.accessSync(path);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
 // Main
 log(`${pkg.name}@${pkg.version}`);
 
 try {
+  // todo: change __dirname to process.cwd() to allow usage with npx
   const lIndex = __dirname.lastIndexOf(path.sep + modulesDir + path.sep);
   if (lIndex === -1) {
-    throw new Error('- Could not find node_modules directory in __dirname');
+    throw new Error(`- Could not find ${modulesDir} directory in __dirname`);
   }
 
   const base = path.resolve(__dirname.slice(0, lIndex));
@@ -37,7 +31,7 @@ try {
 
   if (fileExists(baseLink)) {
     if (base === fs.realpathSync(baseLink)) {
-      log('- $ symlink already points to base\n');
+      log('- $ symlink already points to base');
       process.exit();
     }
 
@@ -46,7 +40,7 @@ try {
 
   fs.symlinkSync(base, baseLink, 'junction');
 
-  log(`- Created $ symlink to ${base}\n`);
+  log(`- Created $ symlink to ${base}`);
 } catch (error) {
-  console.warn(`${yellow}${error.message}\n- Not creating $ symlink${reset}\n`);
+  console.warn(`${yellow}${error.message}\n- Not creating $ symlink${reset}`);
 }
