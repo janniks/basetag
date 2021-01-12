@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const fileExists = require('../lib/utils').fileExists;
+const { fileExists } = require('../lib/utils');
 
 const pkg = require('../package.json');
 
