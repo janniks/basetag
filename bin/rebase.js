@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-console.log('todo: rebase command');
-
 // todo: add .gitignore patterns to ignore list
 const IGNORE_LIST = ['node_modules', '.git'];
+
+const DRY_RUN = process.argv.includes('--dry-run');
 
 // @root/walk (https://git.rootprojects.org/root/walk.js)
 // Copyright 2020 AJ ONeal - Mozilla Public License Version 2.0
@@ -121,12 +121,11 @@ async function rootify(pathname, filename) {
   }
 
   if (oldTxt != txt) {
-    console.info('\n# [', dirname, filename, ']');
+    console.info(`\n# ${dirname}${path.sep}${filename}`);
     changes.forEach(function ([pkgpath, b]) {
-      console.log('#', pkgpath, '<=', b);
+      console.log(`  ${b} -> ${pkgpath}`);
     });
     await fs.writeFile(pathname, txt);
-    console.info('git add', path.join(dirname, filename), ';');
   }
 }
 
