@@ -17,7 +17,7 @@ function execute(command) {
   'npm init -y',
   `npm pack ..${path.sep}..`,
   `npm install --save ${pkg.name}-${pkg.version}.tgz`,
-  './node_modules/.bin/basetag link',
+  `node_modules${path.sep}.bin${path.sep}basetag link`,
   'node index.js',
 ].forEach((command) => {
   try {
