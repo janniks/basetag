@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const { resolve } = require('path');
-const { spawnSync } = require('child_process');
+const resolve = require('path').resolve;
+const spawnSync = require('child_process').spawnSync;
 
-const { fileExists } = require('../lib/utils');
+const fileExists = require('../lib/utils').fileExists;
 
 const [, , ...args] = process.argv;
 

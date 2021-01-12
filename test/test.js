@@ -1,5 +1,5 @@
 const path = require('path');
-const { spawnSync } = require('child_process');
+const spawnSync = require('child_process').spawnSync;
 
 const pkg = require('../package');
 
