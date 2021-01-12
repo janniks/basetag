@@ -99,10 +99,10 @@ async function rootify(pathname, filename) {
 
     // /User/me/project/lib/foo/bar + ../foo.js
     // becomes $/lib/foo/foo.js
-    const pkgpath = '$' + path.resolve(dirname + '/', b).slice(pkglen);
+    const pkgPath = '$' + path.resolve(dirname + '/', b).slice(pkglen);
 
-    const result = a + pkgpath + c;
-    changes.push([pkgpath, b]);
+    const result = a + pkgPath + c;
+    changes.push([b, pkgPath]);
     return result;
   }
 
@@ -114,8 +114,8 @@ async function rootify(pathname, filename) {
 
   if (originalText != newText) {
     console.info(`\n# ${dirname}${path.sep}${filename}`);
-    changes.forEach(function ([pkgpath, b]) {
-      console.log(`  ${b} -> ${pkgpath}`);
+    changes.forEach(function ([oldPath, pkgPath]) {
+      console.log(`  ${oldPath} -> ${pkgPath}`);
     });
     await fs.writeFile(pathname, newText);
   }
