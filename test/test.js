@@ -1,5 +1,5 @@
 const path = require('path');
-const spawnSync = require('child_process').spawnSync;
+const { spawnSync } = require('child_process');
 
 const pkg = require('../package');
 
@@ -17,6 +17,7 @@ function execute(command) {
   'npm init -y',
   `npm pack ..${path.sep}..`,
   `npm install --save ${pkg.name}-${pkg.version}.tgz`,
+  './node_modules/.bin/basetag link',
   'node index.js',
 ].forEach((command) => {
   try {

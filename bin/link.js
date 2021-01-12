@@ -44,3 +44,5 @@ try {
 } catch (error) {
   console.warn(`${yellow}${error.message}\n- Not creating $ symlink${reset}`);
 }
+
+// todo: add this file to node_modules/.hooks/postinstall to persist
