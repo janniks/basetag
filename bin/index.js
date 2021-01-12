@@ -39,6 +39,6 @@ try {
 }
 
 if (result && result.stdout) console.log(`${result.stdout}`);
-if (result && result.stderr) console.log(`${result.stderr}`);
+if (result && result.stderr) console.error(`${result.stderr}`);
 
 process.exit(result.status || 0);
