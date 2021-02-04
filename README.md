@@ -47,7 +47,7 @@ npx basetag link
 
 ---
 
-> ⚠️ Unfortunately npm does not like basetag very much
+> ⚠️ Unfortunately, npm does not like basetag very much
 >
 > npm will remove the `$` on every `npm install <package>`
 
