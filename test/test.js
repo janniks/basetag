@@ -6,28 +6,21 @@ const pkg = require('../package');
 const exampleDir = path.resolve(__dirname, 'example');
 console.log(exampleDir);
 
-function execute(command) {
-  const args = command.split(' ');
-  const prog = args.shift();
-  return spawnSync(prog, args, { cwd: exampleDir, shell: true });
+function runShell(command) {
+  return spawnSync(command, [], {
+    cwd: exampleDir,
+    shell: true,
+    stdio: 'inherit',
+  });
 }
 
-[
-  'rm -rf node_modules *.json *.tgz',
-  'npm init -y',
-  `npm pack ..${path.sep}..`,
-  `npm install --save ${pkg.name}-${pkg.version}.tgz`,
-  `node_modules${path.sep}.bin${path.sep}basetag link`,
-  'node index.js',
-].forEach((command) => {
+function runCommand(command) {
   try {
-    const result = execute(command);
+    const result = runShell(command);
 
     if (result.error) throw result.error;
 
     if (result.status != 0) {
-      console.log(`stdout:\n${result.stdout}`);
-      console.error(`stderr:\n${result.stderr}`);
       throw 'Bad status code';
     }
 
@@ -37,6 +30,30 @@ function execute(command) {
     console.error(`${error.stack ? error.stack : error}`);
     process.exit(1);
   }
-});
+}
 
-console.log('\nTest passed.');
+function runCleanup() {
+  [
+    'rm -rf node_modules *.json *.tgz',
+    'npm init -y',
+    `npm pack ..${path.sep}..`,
+    `npm install --save ${pkg.name}-${pkg.version}.tgz`,
+    `node_modules${path.sep}.bin${path.sep}basetag link`,
+    'node index.js',
+  ].forEach(runCommand);
+}
+
+// Tests
+
+/// Run relative
+runCleanup();
+runCommand(`node_modules${path.sep}.bin${path.sep}basetag link`);
+runCommand('node index.js');
+
+/// Run via npx
+runCleanup();
+runCommand(`npx basetag link`);
+runCommand('node index.js');
+
+// Success
+console.log('\nTests passed.');

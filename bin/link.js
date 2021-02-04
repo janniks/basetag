@@ -3,46 +3,93 @@
 const fs = require('fs');
 const path = require('path');
 
-const { fileExists } = require('../lib/utils');
+const { fileExists } = require('basetag/lib/utils');
 
-const pkg = require('../package.json');
+const pkg = require('basetag/package.json');
 
-// Helpers
+// Config
 const reset = '\x1b[0m';
 const yellow = '\x1b[33m';
 const blue = '\x1b[34m';
 
-const log = (message) => console.log(`${blue}${message}${reset}`);
-
 const modulesDir = 'node_modules';
+
+// Options
+const args = new Set(process.argv);
+const OPT_ABSOLUTE = args.has('--absolute');
+const OPT_HOOK = args.has('--hook');
+const OPT_VERBOSE = args.has('--verbose');
+
+// Paths
+const launchPath = process.cwd();
+
+const pathSegments = __dirname.split(path.sep).filter((x) => x !== '');
+const lastModulesDir = pathSegments.lastIndexOf(modulesDir);
+
+const isDependency = lastModulesDir > 0;
+
+const basePath = isDependency
+  ? path.resolve(path.sep, ...pathSegments.slice(0, lastModulesDir))
+  : launchPath;
+console.log('basePath', basePath);
+const modulesPath = path.resolve(basePath, modulesDir);
+
+// Methods
+const log = (message) =>
+  OPT_VERBOSE && console.log(`${blue}${message}${reset}`);
+
+const createLink = () => {
+  try {
+    if (!fs.existsSync(modulesPath)) {
+      throw new Error(`${modulesDir} directory does not exist`);
+    }
+
+    const linkPath = path.resolve(modulesPath, '$');
+    if (fileExists(linkPath)) {
+      if (basePath === fs.realpathSync(linkPath)) {
+        log('- $ symlink already points to base');
+        return;
+      }
+
+      throw new Error(`file already exists: ${linkPath}`);
+    }
+
+    if (OPT_ABSOLUTE) {
+      fs.symlinkSync(basePath, linkPath, 'junction');
+    } else {
+      fs.symlinkSync('..', linkPath, 'junction');
+    }
+
+    log(`- created $ symlink to ${basePath}`);
+  } catch (error) {
+    console.warn(
+      `${yellow}- ${error.message}\n- $ symlink not created${reset}`
+    );
+  }
+};
+
+const copyLinkScript = (scriptName) => {
+  const currentFile = path.resolve(__filename);
+  const hooksPath = path.resolve(modulesPath, '.hooks');
+  const scriptPath = path.resolve(hooksPath, scriptName);
+
+  if (!fs.existsSync(hooksPath)) {
+    fs.mkdirSync(hooksPath, { recursive: true });
+  }
+
+  if (fileExists(scriptPath)) {
+    log(`- ${scriptName} npm hook already exists`);
+    return;
+  }
+
+  fs.createReadStream(currentFile).pipe(fs.createWriteStream(scriptPath));
+  fs.copyFileSync(currentFile, scriptPath);
+  log(`- ${scriptName} npm hook installed`);
+};
 
 // Main
 log(`${pkg.name}@${pkg.version}`);
 
-try {
-  // todo: change __dirname to process.cwd() to allow usage with npx
-  const lIndex = __dirname.lastIndexOf(path.sep + modulesDir + path.sep);
-  if (lIndex === -1) {
-    throw new Error(`- Could not find ${modulesDir} directory in __dirname`);
-  }
+createLink();
 
-  const base = path.resolve(__dirname.slice(0, lIndex));
-  const baseLink = path.resolve(base, modulesDir, '$');
-
-  if (fileExists(baseLink)) {
-    if (base === fs.realpathSync(baseLink)) {
-      log('- $ symlink already points to base');
-      process.exit();
-    }
-
-    throw new Error(`- File already exists: ${baseLink}`);
-  }
-
-  fs.symlinkSync(base, baseLink, 'junction');
-
-  log(`- Created $ symlink to ${base}`);
-} catch (error) {
-  console.warn(`${yellow}${error.message}\n- Not creating $ symlink${reset}`);
-}
-
-// todo: add this file to node_modules/.hooks/postinstall to persist
+OPT_HOOK && copyLinkScript('postinstall');

@@ -117,6 +117,9 @@ async function rootify(pathname, filename) {
     changes.forEach(function ([oldPath, pkgPath]) {
       console.log(`  ${oldPath} -> ${pkgPath}`);
     });
+
+    if (OPT_DRY_RUN) return;
+
     await fs.writeFile(pathname, newText);
   }
 }

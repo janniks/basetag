@@ -25,20 +25,22 @@ options:
   process.exit();
 }
 
+const spawnOptions = {
+  shell: true,
+  stdio: 'inherit',
+};
+
 // execute sub-command
 let result;
 try {
   const path = resolve(__dirname, '..', '..', '.bin', `basetag-${command}`);
   if (fileExists(path)) {
-    result = spawnSync(path, args, { shell: true });
+    result = spawnSync(path, args, spawnOptions);
   } else {
-    result = spawnSync('npx', [`basetag-${command}`, ...args], { shell: true });
+    result = spawnSync('npx', [`basetag-${command}`, ...args], spawnOptions);
   }
 } catch (e) {
   console.error(e);
 }
-
-if (result && result.stdout) console.log(`${result.stdout}`);
-if (result && result.stderr) console.error(`${result.stderr}`);
 
 process.exit(result.status || 0);
