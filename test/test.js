@@ -32,26 +32,24 @@ function runCommand(command) {
   }
 }
 
-function runCleanup() {
+function runPreparation() {
   [
     'rm -rf node_modules *.json *.tgz',
     'npm init -y',
     `npm pack ..${path.sep}..`,
     `npm install --save ${pkg.name}-${pkg.version}.tgz`,
-    `node_modules${path.sep}.bin${path.sep}basetag link`,
-    'node index.js',
   ].forEach(runCommand);
 }
 
 // Tests
 
 /// Run relative
-runCleanup();
+runPreparation();
 runCommand(`node_modules${path.sep}.bin${path.sep}basetag link`);
 runCommand('node index.js');
 
 /// Run via npx
-runCleanup();
+runPreparation();
 runCommand(`npx basetag link`);
 runCommand('node index.js');
 
