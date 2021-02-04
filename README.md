@@ -26,7 +26,9 @@
 </p>
 
 <h3 align="center">
-  <a href="#installation-">Installation</a>
+  <a href="#usage-">Usage</a>
+  <span> · </span>
+  <a href="#docs-">Docs</a>
   <span> · </span>
   <a href="#why-%EF%B8%8F">Why?</a>
   <span> · </span>
