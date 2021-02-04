@@ -45,10 +45,11 @@ npx basetag link
 
 ---
 
-_Unfortunately npm does not like basetag very much_ ⚠️
-_npm will remove the `$` on every `npm install <package>`_
+> ⚠️ Unfortunately npm does not like basetag very much
+>
+> npm will remove the `$` on every `npm install <package>`
 
-To fix this issue there are some solutions:
+_To fix this issue there are some solutions:_
 
 ### Fix #1
 
