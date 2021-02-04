@@ -1,7 +1,7 @@
 <h1 align="center" style="font-weight: bold !important">basetag ⚾️</h1>
 
 <p align="center">
-  <strong>basetag</strong> lets you require local modules relative to your Node.js project base path
+  <strong>basetag</strong> lets you use local modules relative to your Node.js project base path
 </p>
 
 <p align="center">
@@ -35,13 +35,46 @@
   <a href="#license-%EF%B8%8F">License</a>
 </h3>
 
-## Installation 🛠
+## Usage 🛠
 
-`npm i -S basetag`
+basetag can create a `$` symlink in your local `node_modules` by running `npx basetag link`
 
-☝️ and that's it!
-You can now use the `$` basetag prefix.
-No need to require basetag itself anywhere.
+---
+
+⚠️ Unfortunately npm does not like basetag very much — npm will remove the `$` on every `npm install <package>`
+
+_To get around this there are some options:_
+
+### Fix #1
+
+Use the `postinstall` script to run basetag after every `npm install`
+
+`package.json`
+
+```
+"scripts": {
+  "postinstall": "npx basetag link"
+}
+```
+
+### Fix #2
+
+Use the `--hook` flag (which sets up an npm hook that runs basetag after every `npm install <package>`
+
+> You only have to do this once (unless you delete your `node_modules` folder).
+> But, you can also use this in connection with Fix #1.
+
+```
+npx basetag link --hook
+```
+
+## Docs 📚
+
+basetag has a few commands that can be run via `npx basetag <command>`
+
+- `link [--absolute] [--hook]` — creates a relative `$` symlink
+  - `--absolute` creates an absolute symlink rather than relative
+  - `--hook` sets up basetag to run after every `npm install ...`
 
 ## Why? ⚡️
 
@@ -55,13 +88,13 @@ If you're not convinced, check out the example below...
 🤯 _The modern **basetag** way:_
 
 ```js
-const balls = require('$/baseball/balls')           // ✅
+const balls = require('$/baseball/balls'); // ✅
 ```
 
 😓 _The traditional (often messy) way:_
 
 ```js
-const balls = require('../../../../baseball/balls') // ❌
+const balls = require('../../../../baseball/balls'); // ❌
 ```
 
 ## How? 💭
@@ -92,7 +125,7 @@ example/
 ### How does `basetag` work?
 
 It's rather simple.
-After installing basetag as a dependency a `postinstall` script creates a symlink that points from `node_modules/$` to your project base path.
+By running basetag, a symlink is created that points from `node_modules/$` to your project base path.
 Everytime you use a `require` with `$/…` Node.js will look inside the `$` package (i.e. our new symlink).
 The lookup is routed natively to your project files.
 
