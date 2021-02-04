@@ -5,6 +5,7 @@
   "main": "postinstall.js",
   "bin": {
     "basetag": "bin/index.js",
+    "basetag-debase": "bin/debase.js",
     "basetag-link": "bin/link.js",
     "basetag-rebase": "bin/rebase.js"
   },
