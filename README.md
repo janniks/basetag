@@ -37,13 +37,18 @@
 
 ## Usage 🛠
 
-basetag can create a `$` symlink in your local `node_modules` by running `npx basetag link`
+basetag can create a `$` symlink in your local `node_modules` by running:
+
+```
+npx basetag link
+```
 
 ---
 
-⚠️ Unfortunately npm does not like basetag very much — npm will remove the `$` on every `npm install <package>`
+_Unfortunately npm does not like basetag very much_ ⚠️
+_npm will remove the `$` on every `npm install <package>`_
 
-_To get around this there are some options:_
+To fix this issue there are some solutions:
 
 ### Fix #1
 
