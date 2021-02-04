@@ -21,17 +21,7 @@ const OPT_HOOK = args.has('--hook');
 const OPT_VERBOSE = args.has('--verbose');
 
 // Paths
-const launchPath = process.cwd();
-
-const pathSegments = __dirname.split(path.sep).filter((x) => x !== '');
-const lastModulesDir = pathSegments.lastIndexOf(modulesDir);
-
-const isDependency = lastModulesDir > 0;
-
-const basePath = isDependency
-  ? path.resolve(path.sep, ...pathSegments.slice(0, lastModulesDir))
-  : launchPath;
-console.log('basePath', basePath);
+const basePath = process.cwd();
 const modulesPath = path.resolve(basePath, modulesDir);
 
 // Methods
