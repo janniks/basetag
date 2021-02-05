@@ -68,12 +68,14 @@ npx basetag link --hook
 Upgrade existing `require`s and `import`s to the basetag way:
 
 ```bash
+# require('../../baseball') => require('$/baseball')
 npx basetag rebase
 ```
 
 Downgrade `require`s and `import`s to the traditional (often messy) way:
 
 ```bash
+# require('$/baseball') => require('../../baseball')
 npx basetag rebase
 ```
 
