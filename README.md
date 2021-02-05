@@ -37,12 +37,44 @@
   <a href="#license-%EF%B8%8F">License</a>
 </h3>
 
+`basetag` creates a `$` symlink in your local `node_modules` so that you can:
+
+😓 Turn _this_:
+
+```js
+const balls = require('../../../../baseball/balls'); // ❌
+```
+
+🤯 Into _this_:
+
+```js
+const balls = require('$/baseball/balls'); // ✅
+```
+
 ## Usage 🛠
 
-basetag can create a `$` symlink in your local `node_modules` by running:
+Install as a **dev** dependency:
 
+```bash
+npm install --save-dev basetag
 ```
-npx basetag link
+
+Create a `$` symlink in your local `node_modules` by running:
+
+```bash
+npx basetag link --hook
+```
+
+Upgrade existing `require`s and `import`s to the basetag way:
+
+```bash
+npx basetag rebase
+```
+
+Downgrade `require`s and `import`s to the traditional (often messy) way:
+
+```bash
+npx basetag rebase
 ```
 
 ---
@@ -83,6 +115,8 @@ basetag has a few commands that can be run via `npx basetag <command>`
 - `link [--absolute] [--hook]` — creates a relative `$` symlink
   - `--absolute` creates an absolute symlink rather than relative
   - `--hook` sets up basetag to run after every `npm install ...`
+- `rebase` - upgrades `require`s and `import`s to use the package-relative `$/`
+- `debase` - downgrades `require`s and `import`s to use file-relative `../`s
 
 ## Why? ⚡️
 
