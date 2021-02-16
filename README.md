@@ -72,13 +72,6 @@ Upgrade existing `require`s and `import`s to the basetag way:
 npx basetag rebase
 ```
 
-Downgrade `require`s and `import`s to the traditional (often messy) way:
-
-```bash
-# require('$/baseball') => require('../../baseball')
-npx basetag rebase
-```
-
 ---
 
 > ⚠️ Unfortunately, npm does not like basetag very much
@@ -118,7 +111,7 @@ basetag has a few commands that can be run via `npx basetag <command>`
   - `--absolute` creates an absolute symlink rather than relative
   - `--hook` sets up basetag to run after every `npm install ...`
 - `rebase` - upgrades `require`s and `import`s to use the package-relative `$/`
-- `debase` - downgrades `require`s and `import`s to use file-relative `../`s
+- **_TODO_** `debase` - downgrades `require`s and `import`s to use file-relative `../`s
 
 ## Why? ⚡️
 
