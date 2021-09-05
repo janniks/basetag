@@ -3,6 +3,6 @@ module.exports = () => {
   const randomRelative = require("../../../../../somewhere/deep/and/random");
   randomRelative();
 
-  const randomAt = require("$/somewhere/deep/and/random");
+  const randomAt = require("../../../../../somewhere/deep/and/random");
   randomAt();
 };
