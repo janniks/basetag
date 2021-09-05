@@ -83,9 +83,7 @@ async function derootify(pathname, filename) {
         // take 2 off pkg to trim package name + respect 0 indexing
         for (let i = pathSplit.length - 2; i >= 0; i--) {
             if (pkgSplit[i] !== pathSplit[i]) {
-                pkgPath += `..${path.sep}`
-            } else {
-                break;
+                pkgPath += '../'
             }
         }
 
@@ -94,11 +92,8 @@ async function derootify(pathname, filename) {
                 pkgPath += pkgSplit[i];
 
                 if (i != pkgSplit.length - 1) {
-                    pkgPath += path.sep;
+                    pkgPath += '/'
                 }
-
-            } else {
-                break;
             }
         }
 
@@ -138,3 +133,5 @@ walk('.', async function (err, pathname, dirent) {
         console.error(e);
     });
 });
+
+console.log('ye')

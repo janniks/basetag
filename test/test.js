@@ -14,8 +14,6 @@ function runShell(command) {
   });
 }
 
-const logs = [];
-
 function runCommand(command) {
   try {
     const result = runShell(command);
@@ -26,9 +24,9 @@ function runCommand(command) {
       throw 'Bad status code';
     }
 
-    logs.push(`✓ ${command}`);
+    console.log(`✓ ${command}`);
   } catch (error) {
-    logs.push(`⨯ ${command}`);
+    console.log(`⨯ ${command}`);
     console.error(`${error.stack ? error.stack : error}`);
     process.exit(1);
   }
@@ -53,15 +51,7 @@ runCommand('node index.js');
 /// Run via npx
 runPreparation();
 runCommand(`npx basetag link`);
-runCommand(`npx basetag rebase`);
 runCommand('node index.js');
-
-/// Run via npx
-runPreparation();
-runCommand(`npx basetag debase`);
-runCommand('node index.js');
-
-logs.forEach(element => console.log);
 
 // Success
 console.log('\nTests passed.');
