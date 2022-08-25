@@ -129,6 +129,16 @@ walk('.', async function (err, pathname, dirent) {
     return false;
   }
 
+  // skip child directories that have their own package.json (such as git submodules)
+  const isChildDir = '.' !== pathname && dirent.isDirectory();
+  if (isChildDir) {
+    const submodulePkg = path.join(pathname, 'package.json');
+    const isNormalDir = await fs.access(submodulePkg).catch(Boolean);
+    if (!isNormalDir) {
+      return false;
+    }
+  }
+  
   if (!dirent.isFile()) {
     return;
   }
