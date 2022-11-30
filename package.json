@@ -14,7 +14,8 @@
     "lib/**.js"
   ],
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "version": "npm version -m \"chore(release): bump to v%s\""
   },
   "repository": {
     "type": "git",
