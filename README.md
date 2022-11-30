@@ -72,6 +72,13 @@ Upgrade existing `require`s and `import`s to the basetag way:
 npx basetag rebase
 ```
 
+Use `--all` to rebase child paths as well as parent paths:
+
+```bash
+# require('./bat') => require('$/baseball/bat')
+npx basetag rebase --all
+```
+
 ---
 
 > ⚠️ Unfortunately, npm does not like basetag very much
